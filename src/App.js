@@ -11,26 +11,18 @@ function lazyWithPreload(importFunction) {
   return component;
 }
 
-// const ImageModal = lazy(() => import('./components/ImageModal'));
 const ImageModal = lazyWithPreload(() => import('./components/ImageModal'));
 
 function App() {
   const [showModal, setShowModal] = useState(false);
 
-  // 1. 컴포넌트 preloading :: 버튼에 마우스오버됐을 경우
-  // 단점
-  // - 번들 사이즈가 너무 큰 경우엔 별로다.
-  // - 모바일 환경에서는 무쓸모
-  //   const handleMouseOver = () => {
-  //     const imageModalComponent = import('./components/ImageModal');
-  //   };
-
-  // 2. 컴포넌트 preloading :: 페이지 로드 이후 preloading하기
   useEffect(() => {
-    // const imageModalComponent = import('./components/ImageModal');
-
-    // factory 패턴 이용
     ImageModal.preload();
+
+    // 이미지 preload
+    const img = new Image();
+    img.src =
+      'https://stillmed.olympic.org/media/Photos/2016/08/20/part-1/20-08-2016-Football-Men-01.jpg?interpolation=lanczos-none&resize=*:800';
   }, []);
 
   return (
