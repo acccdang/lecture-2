@@ -6,7 +6,7 @@ import SurveyChart from './components/SurveyChart';
 import Footer from './components/Footer';
 
 function lazyWithPreload(importFunction) {
-  const component = lazy(() => import(importFunction));
+  const component = lazy(importFunction);
   component.preload = importFunction;
   return component;
 }
